@@ -1,18 +1,13 @@
 #include <iostream>
 using namespace std;
 
-int t, a1 = 1, b1 = 0, a2 = 0, b2 = 1, tmp;
+int t, a1 = 1, b1 = 0, at, bt;
 int main() {
 	cin >> t;
-	if (t == 1) cout << 0 << " " << 1;
-	else {
-		for (int i = 1; i < t; i++) {
-			tmp = a2;
-			a2 += a1; a1 = tmp;
-			tmp = b2;
-			b2 += b1; b1 = tmp;
-		}
-		cout << a2 << " " << b2;
+	for (int i = 0; i < t; i++) {
+		at = a1; bt = b1;
+		a1 = bt; b1 += at;
 	}
+	cout << a1 << " " << b1;
 	return 0;
 }
