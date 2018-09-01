@@ -1,18 +1,8 @@
-#include <iostream>
-using namespace std;
+#include <cstdio>
 
-int n, a, b, c;
+int n;
 int main() {
-	cin >> n;
-	if (n / 300 > 0) {
-		a = n / 300;
-		n %= 300;
-	}
-	if (n / 60 > 0) {
-		b = n / 60;
-		n %= 60;
-	}
-	c = n / 10 + (n%10>0? 1: 0);
-	cout << a << " " << b << " " << c;
+	scanf_s("%d", &n);
+	printf(n % 10 > 0 ? "-1" : "%d %d %d", n / 300, n / 60 % 5, n / 10 % 6);
 	return 0;
 }
