@@ -2,8 +2,8 @@
 #include <cstring>
 using namespace std;
 
-char a[15], b[8], c[15], d[8], r[15];
-int s1, s2, p, m;
+char a[15], b[8], c[15], d[8];
+int s1, s2;
 int main() {
 	cin >> a >> b >> c >> d;
 	s1 = strlen(a); s2 = strlen(c);
