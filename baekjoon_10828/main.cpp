@@ -3,7 +3,6 @@
 #include <cstring>
 using namespace std;
 
-
 class stack {
 private:
 	int s;
