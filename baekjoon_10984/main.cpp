@@ -11,6 +11,7 @@ int main(){
 			m += c; n += c*g;
 		}
 		printf("%d %.1lf\n", m, n / m);
+		m = 0; n = 0;
 	}
 	return 0;
 }
