@@ -1,15 +1,16 @@
-#include <cstdio>
+#include <iostream>
+#include <string>
 using namespace std;
 
 int t, a, b;
-char i1[1000001];
+string str;
 int main() {
-	scanf_s("%d", &t);
+	ios::sync_with_stdio(false);
+	cin >> t;
 	while (t--) {
-		scanf_s("%d %d%*c", &a, &b);
-		gets_s(i1, 1000001);
-		for (int i = 0; i1[i]; i++) printf("%c", (a*(i1[i] - 'A') + b) % 26 + 'A');
-		printf("\n");
+		cin >> a >> b >> str;
+		for (int i = 0; i < str.size(); i++) str[i] = (a*(str[i] - 'A') + b) % 26 + 'A';
+		cout << str << endl;
 	}
 	return 0;
 }
