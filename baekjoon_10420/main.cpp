@@ -1,6 +1,6 @@
 #include <cstdio>
 
-int i1, y = 2015, m = 4, d = 1;
+int i1, y = 2014, m = 4, d = 1;
 int mon[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 int main() {
 	scanf_s("%d", &i1);
