@@ -3,9 +3,10 @@
 using namespace std;
 
 int t1, t2;
-char r[5][100000];
+char r[5][100001];
 string a, b;
 int main() {
+	ios::sync_with_stdio(false); cin.tie(0);
 	cin >> a >> b;
 	for (int i = 0; a[i]; i++) {
 		t1 = a[i] - '0'; t2 = b[i] - '0';
