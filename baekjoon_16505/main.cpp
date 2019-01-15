@@ -1,8 +1,14 @@
+#include <cstdio>
+
+int main() {
+	char[1024][1024];
+}
+
+/*
 #include "iostream"
 #include "string"
 #include "cmath"
 using namespace std;
-
 int n;
 string star[1024] = {
 	"*",
@@ -10,7 +16,6 @@ string star[1024] = {
 	"* *",
 	"****"
 };
-
 void create_stars(int count) {
 	if (n <= 2 || count == n) {
 		for (int i = pow(2,n)-1; i >= 0; i--) {
@@ -29,7 +34,6 @@ void create_stars(int count) {
 		create_stars(count + 1);
 	}
 }
-
 int main() {
 	cin.tie(0);
 	ios::sync_with_stdio(false);
@@ -37,3 +41,4 @@ int main() {
 	create_stars(2);
 	return 0;
 }
+*/
