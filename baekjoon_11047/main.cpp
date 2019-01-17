@@ -1,23 +1,24 @@
-#include "iostream"
-using namespace std;
+#include "cstdio"
 
 int *coin;
-int n, k, tmp, c;
+int n, k, c;
 
 int main() {
-	cin.tie(0);
-	ios::sync_with_stdio(false);
-	cin >> n >> k;
+	scanf_s("%d %d", &n, &k);
 	coin = new int[n];
-	for (int i = 0; i < n; i++)
-		cin >> coin[i];
+	while (n--) {
+		scanf_s("%d", &coin[c++]);
+		if (coin[c - 1] > k) break;
+	}
+	n = 0;
+
 	while (k) {
-		if (k < coin[n-1]) n--;
+		if (coin[c - 1] > k) c--;
 		else {
-			k -= coin[n - 1];
-			c++;
+			n += k / coin[c - 1];
+			k %= coin[c - 1];
 		}
 	}
-	cout << c;
+	printf("%d", n);
 	return 0;
 }
