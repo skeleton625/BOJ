@@ -1,32 +1,25 @@
-#include <iostream>
+#include <cstdio>
 #include <algorithm>
-#include <map>
-using namespace std;
+typedef std::pair<int, int> meet;
 
-int s, e, n, *al;
-map<int, int> dat;
+meet *m;
+int n;
 
 int main() {
-	cin.tie(0);
-	ios::sync_with_stdio(false);
-	cin >> n;
-	al = new int[n];
-	for (int i = 0; i < n; i++) {
-		cin >> s >> e;
-		al[i] = e;
-		if(e-dat[e] >= e-s){
-			dat[e] = s;
-		}
-	}
-	sort(al, al + n);
-	int c = 1;
-	e = 0;
+	scanf_s("%d", &n);
+	m = new meet[n];
+
+	for (int i = 0; i < n; i++)
+		scanf_s("%d %d", &m[i].second, &m[i].first);
+	sort(m, m + n);
+	
+	int p = 0, c = 1;
 	for (int i = 1; i < n; i++) {
-		if (al[e] <= dat[al[i]]) {
+		if (m[i].second >= m[p].first) {
+			p = i;
 			c++;
-			e = i;
 		}
 	}
-	cout << c;
+	printf("%d", c);
 	return 0;
 }
