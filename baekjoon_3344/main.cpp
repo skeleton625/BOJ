@@ -1,40 +1,33 @@
 #include <cstdio>
-#include <cstring>
+#include <string>
+using namespace std;
 
-bool *queen_center, *queen_right, *queen_left;
-int n;
-
-bool find_queen(int floor) {
-	if (floor == n) {
-		return true;
-	}
-	for (int i = 0; i < n; i++) {
-		if (!(queen_center[i] || queen_right[floor + i] || queen_left[n - 1 + floor - i])) {
-			queen_center[i] = queen_right[floor + i] = queen_left[n - 1 + floor - i] = true;
-			if (find_queen(floor + 1)) {
-				printf("%d\n", i + 1);
-				return true;
-			}
-			else {
-				queen_center[i] = queen_right[floor + i] = queen_left[n - 1 + floor - i] = false;
-			}
-		}
-		
-	}
-	return false;
-}
+/* 
+	https://en.wikipedia.org/wiki/Eight_queens_puzzle#Explicit_solutions 
+	-> Existence of soultions
+*/
 
 int main() {
+	int n;
+	string result;
+	
 	scanf_s("%d", &n);
-	queen_center = new bool[n];
-	queen_right = new bool[n];
-	queen_left = new bool[n];
-
-	memset(queen_center, 0, sizeof(bool)*n);
-	memset(queen_right, 0, sizeof(bool)*(2 * n - 1));
-	memset(queen_left, 0, sizeof(bool)*(2 * n - 1));
-
-	find_queen(0);
-
+	bool isOdd = n % 2;
+	if (isOdd) n--;
+	if (n % 6 != 2) {
+		for (int i = 1; i <= n / 2; i++)
+			result.append(to_string(2 * i) + '\n');
+		for (int i = 1; i <= n / 2; i++)
+			result.append(to_string(2 * i-1) + '\n');
+	} else if (n % 6 != 0) {
+		int tmp = n / 2;
+		for (int i = 1; i <= tmp; i++)
+			result.append(to_string(1 + (2 * i + tmp - 3) % n) + '\n');
+		for (int i = tmp; i >= 1; i--)
+			result.append(to_string(n - (2 * i + tmp - 3) % n) + '\n');
+		
+	}
+	if (isOdd) result.append(to_string(n + 1));
+	puts(result.c_str());
 	return 0;
 }
