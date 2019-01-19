@@ -14,13 +14,11 @@ int main() {
 		for (int i = 0; i < n; i++)
 			cin >> att[i].first >> att[i].second;
 		sort(att, att + n);
-		for (int i = n - 1; i >= 1; i--) {
-			for (int j = i - 1; j >= 0; j--) {
-				if (att[i].second > att[j].second) {
-					s++;
-					break;
-				}
-			}
+		int tmp = att[0].second;
+		for (int i = 1; i < n; i++) {
+			if (att[i].second < tmp)
+				tmp = att[i].second;
+			else s++;
 		}
 
 		cout << n - s << '\n';
