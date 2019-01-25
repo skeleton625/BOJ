@@ -1,0 +1,3 @@
+﻿  main.cpp
+d:\program\baekjoon_6549\baekjoon_6549\main.cpp(71): warning C4244: '초기화 중': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  baekjoon_6549.vcxproj -> D:\Program\baekjoon_6549\Debug\baekjoon_6549.exe
