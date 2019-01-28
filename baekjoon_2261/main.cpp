@@ -1,74 +1,75 @@
 #include <iostream>
 #include <algorithm>
+#include <vector>
 #include <cmath>
-#include <map>
 using namespace std;
 
 typedef pair<int, int> pai;
 typedef unsigned long long ll;
-
-pai dots[100000];
-map<pai, int> comp_dots;
 int n;
 
-/* 점과 점 사이의 최소 거리를 구하는 함수 */
+/* 두 점간의 최소 길이의 제곱을 반환하는 함수 */
 ll getDist(pai d1, pai d2) {
 	int x = d2.first - d1.first;
 	int y = d2.second - d1.second;
-	return (ll)(y * y + x * x);
+	return (ll)(x * x + y * y);
+}
+
+/* 각 점들 사이의 최소 길이를 비교해 가장 최소 길이의 제곱을 반환하는 함수 */
+ll comp_dots(vector<pai>::iterator dots, int n) {
+	/* 범위 안에 두 개의 점만 있을 경우 최소 길이를 계산해 반환 */
+	if (n == 2)
+		return getDist(dots[0], dots[1]);
+	/* 범위 안에 세 개의 점만 있을 경우 최소 길이를 계산해 반환 */
+	if (n == 3)
+		return min({ getDist(dots[0], dots[1]), getDist(dots[1], dots[2]), getDist(dots[2],dots[0]) });
+
+	/* x축을 중간 지점으로 나눴을 경우, 중간을 기준으로 이전, 이후에 있는 점의 중간 x 값을 구함 */
+	int line = (dots[n/2-1].first + dots[n/2].first) / 2;
+	/* 중간 지점으로 나눈 뒤, 이전과 이후 구간의 최소 길이를 구해 변수 d에 정의 */
+	ll d = min(comp_dots(dots, n/2), comp_dots(dots+n/2,n-n/2));
+
+	/* x축으로 정렬된 값 중 지정된 지점에 있는 점들을 y축으로 정렬시킬 vector 변수 */
+	vector<pai> mid;
+
+	/* 
+		중간 지점을 기준으로 점들의 거리가 최소 길이 d보다 작을 경우 vector 변수 mid에 입력 
+		입력할 때 x, y 값을 이전 vector 변수와 반대로 입력( x, y -> y, x )
+	*/
+	for (int i = 0; i < n; i++) {
+		int t = line - dots[i].first;
+		if ((ll)(t*t) < d)
+			mid.push_back({dots[i].second, dots[i].first});
+	}
+	/* vector 변수 mid에 입력된 점들을 y축을 기준으로 정렬함 */
+	sort(mid.begin(), mid.end());
+	
+	int mid_sz = mid.size();
+	/* i -> 점 1, j -> 점 2 */
+	/* 
+		vector 변수 mid에 입력된 점들의 길이를 측정 
+		해당 점들의 거리가 최소 길이를 벗어나지 않는 구간 내에서만 측정함
+		즉, 해당 점들은 중간 지점에 최소 길이를 둔 점들 중 가장 작은 길이가 있는지 확인하기 위함
+	*/
+	for (int i = 0; i < mid_sz - 1; i++)
+		for (int j = i + 1; j < mid_sz && mid[j].first - mid[i].first < d; j++)
+			d = min(d, getDist(mid[i], mid[j]));
+	
+	return d;
 }
 
 int main() {
 	cin.tie(0);
 	ios::sync_with_stdio(false);
 	cin >> n;
+	/* 점을 입력받아 둘 vector 변수 */
+	vector<pai> dots(n);
 	for (int i = 0; i < n; i++)
 		cin >> dots[i].first >> dots[i].second;
-	/* 점들의 x값에 대해서 정렬 */
-	sort(dots, dots + n);
 
-	/* x축 기준으로 정렬했을 경우 dots 0, dots 1를 가장 가까운 점으로 지정 */
-	comp_dots[{dots[0].second, dots[0].first}] = 1;
-	comp_dots[{dots[1].second, dots[1].first}] = 1;
+	/* 입력받은 점들을 x축 기준으로 정렬 */
+	sort(dots.begin(), dots.end());
 
-	/* 현재 지정된 두 점 사이의 길이를 최소 길이로 지정 */
-	ll res_min = getDist(dots[0], dots[1]);
-
-	/* 현재 점 위치와 가장 가까운 점 위치를 파악하기 위한 위치 변수 */
-	int last = 0;
-	
-	/* dots 0, dots 1은 이미 지정한 상태이니 그 다음 번째 dots 부터 탐색 시작 */
-	for (int i = 2; i < n; i++) {
-		while (last < i) {
-			ll x = dots[last].first - dots[i].first;
-			/* x축으로 최소 길이보다 현재 점과 이전 점의 위치가 작거나 같을 경우 정지 -> 해당 위치를 최소로 선택 */
-			if (x*x <= res_min) {
-				break;
-			}
-			/* 그렇지 않을 경우 해당 값은 필요가 없으므로 비교 대상에서 제외시킴 */
-			else {
-				comp_dots.erase({ dots[last].second, dots[last].first });
-				/* 비교할 이전 점의 위치를 이동시킴 */
-				last++;
-			}
-		}
-
-		/* y축 상에서 실제 길이로 최소 범위를 파악하기 위해 현재 최소 길이의 실제 길이를 구함 */
-		int dist = sqrt(res_min);
-
-		/* map에 저장되어 있는 점들 중에서 최소 실제 길이 내에 있는 점들을 파악하기 위해 lower, upper bound를 실행 */
-		/* 여기서 x값의 경우 정수 절대값으로 10000을 넘지 않기 때문에 x의 범위로 설정 */
-		auto lo = comp_dots.lower_bound({ dots[i].second - dist, -10000 });
-		auto up = comp_dots.upper_bound({ dots[i].second + dist, 10000 });
-
-		/* 최소 실제 길이 내에 존재하는 점들과 현재 점과의 거리를 계산, 최소 값을 결정해줌 */
-		for (auto it = lo; it != up; it++)
-			res_min = min(res_min, getDist({ it->first.second, it->first.first }, dots[i]));
-
-		/* 현재 점이 최소 길이에 있는 점이므로 map에 추가해줌 */
-		comp_dots[{dots[i].second, dots[i].first}] = 1;
-	}
-
-	cout << res_min;
+	cout << comp_dots(dots.begin(), n);
 	return 0;
 }
