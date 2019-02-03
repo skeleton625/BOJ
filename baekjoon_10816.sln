@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2019
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "baekjoon_10816", "baekjoon_10816\baekjoon_10816.vcxproj", "{ABAFC42D-A4AA-435C-8DB4-90CB3658B28A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ABAFC42D-A4AA-435C-8DB4-90CB3658B28A}.Debug|x64.ActiveCfg = Debug|x64
+		{ABAFC42D-A4AA-435C-8DB4-90CB3658B28A}.Debug|x64.Build.0 = Debug|x64
+		{ABAFC42D-A4AA-435C-8DB4-90CB3658B28A}.Debug|x86.ActiveCfg = Debug|Win32
+		{ABAFC42D-A4AA-435C-8DB4-90CB3658B28A}.Debug|x86.Build.0 = Debug|Win32
+		{ABAFC42D-A4AA-435C-8DB4-90CB3658B28A}.Release|x64.ActiveCfg = Release|x64
+		{ABAFC42D-A4AA-435C-8DB4-90CB3658B28A}.Release|x64.Build.0 = Release|x64
+		{ABAFC42D-A4AA-435C-8DB4-90CB3658B28A}.Release|x86.ActiveCfg = Release|Win32
+		{ABAFC42D-A4AA-435C-8DB4-90CB3658B28A}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E42C80B7-2241-45D2-B71A-2463F0BFB512}
+	EndGlobalSection
+EndGlobal
