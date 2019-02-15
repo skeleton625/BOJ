@@ -8,11 +8,12 @@ using namespace std;
 typedef pair<int, int> vertex;
 
 int n, m, x;
-vector<vertex> mat[1001];
-vector<int> back;
-vector<int> line;
+vector<vertex> go[1001];
+vector<vertex> back[1001];
+vector<int> go_line;
+vector<int> back_line;
 
-void dijkstra(int start, vector<int> &pre_line) {
+void dijkstra(int start, vector<int> &pre_line, vector<vertex> *mat) {
 	priority_queue<vertex, vector<vertex>, greater<vertex>> que;
 
 	pre_line[start] = 0;
@@ -49,17 +50,17 @@ int main() {
 	
 	for (int i = 0; i < m; i++) {
 		cin >> a >> b >> c;
-		mat[a].push_back({ b, c });
+		go[a].push_back({ b, c });
+		back[b].push_back({ a, c });
 	}
 
-	back = vector<int>(n + 1, 100000);
-	dijkstra(x, back);
+	go_line = vector<int>(n + 1, 100000);
+	back_line = vector<int>(n + 1, 100000);
+	dijkstra(x, go_line, go);
+	dijkstra(x, back_line, back);
 
-	for (int i = 1; i <= n; i++) {
-		line = vector<int>(n + 1, 100000);
-		dijkstra(i, line);
-		if(i != x) re_max = max(re_max, back[i]+line[x]);
-	}
+	for (int i = 1; i <= n; i++)
+		re_max = max(re_max, go_line[i] + back_line[i]);
 
 	cout << re_max;
 	return 0;
