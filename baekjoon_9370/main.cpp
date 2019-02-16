@@ -7,11 +7,11 @@ using namespace std;
 typedef pair<int, int> pai;
 int n, m, t;
 int s, g, h;
-vector<pai> sline, gline, hline;
+vector<int> line;
 
-void dijkstra(int s, vector<pai> *mat, vector<pai> &line) {
+void dijkstra(int s, vector<pai> *mat) {
 	priority_queue<pai, vector<pai>, greater<pai>> que;
-	line[s] = make_pair(0, 0);
+	line[s] = 0;
 	que.push({0, s});
 
 	int pn, pd;
@@ -20,7 +20,7 @@ void dijkstra(int s, vector<pai> *mat, vector<pai> &line) {
 		pd = que.top().first;
 		que.pop();
 
-		if (line[pn].first < pd)
+		if (line[pn] < pd)
 			continue;
 		
 		int nn, nd;
@@ -28,9 +28,8 @@ void dijkstra(int s, vector<pai> *mat, vector<pai> &line) {
 			nn = mat[pn][i].second;
 			nd = pd + mat[pn][i].first;
 
-			if (line[nn].first > nd) {
-				line[nn].first = nd;
-				line[nn].second = pn;
+			if (line[nn] > nd) {
+				line[nn] = nd;
 				que.push({ nd, nn });
 			}
 		}
@@ -49,26 +48,20 @@ int main() {
 		cin >> n >> m >> t >> s >> g >> h;
 		for (int i = 0; i < m; i++) {
 			cin >> a >> b >> c;
-
+			if ((a == g && b == h) || (a == h && b == g)) c = 2 * c - 1;
+			else c *= 2;
 			mat[a].push_back({ c, b });
 			mat[b].push_back({ c, a });
 		}
 
-		sline = vector<pai>(n + 1, { 2000000, 0 });
-		gline = vector<pai>(n + 1, { 2000000, 0 });
-		hline = vector<pai>(n + 1, { 2000000,0 });
-		dijkstra(s, mat, sline);
-		dijkstra(g, mat, gline);
-		dijkstra(h, mat, hline);
-		
-		int num, c1, c2;
+		line = vector<int>(n + 1, 4000000);
+		dijkstra(s, mat);
+
+		int num;
 		priority_queue<int, vector<int>, greater<int>> poss;
 		for (int i = 0; i < t; i++) {
 			cin >> num;
-			c1 = sline[g].first + gline[h].first + hline[num].first;
-			c2 = sline[h].first + hline[g].first + gline[num].first;
-			if (c1 == sline[num].first || c2 == sline[num].first)
-				poss.push(num);
+			if (line[num] % 2) poss.push(num);
 		}
 
 		while (!poss.empty()) {
