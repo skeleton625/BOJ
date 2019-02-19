@@ -1,0 +1,5 @@
+﻿  main.cpp
+d:\source\repos\baekjoon_1149\baekjoon_1149\main.cpp(10): warning C4101: 'a' :참조되지 않은 지역 변수입니다.
+d:\source\repos\baekjoon_1149\baekjoon_1149\main.cpp(10): warning C4101: 'b' :참조되지 않은 지역 변수입니다.
+d:\source\repos\baekjoon_1149\baekjoon_1149\main.cpp(10): warning C4101: 'c' :참조되지 않은 지역 변수입니다.
+  baekjoon_1149.vcxproj -> D:\source\repos\baekjoon_1149\Debug\baekjoon_1149.exe
