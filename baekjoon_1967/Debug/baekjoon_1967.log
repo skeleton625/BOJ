@@ -1,0 +1,3 @@
+﻿  main.cpp
+d:\source\repos\baekjoon_1967\baekjoon_1967\main.cpp(29): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  baekjoon_1967.vcxproj -> D:\source\repos\baekjoon_1967\Debug\baekjoon_1967.exe
