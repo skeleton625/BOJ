@@ -1,0 +1,4 @@
+﻿  main.cpp
+d:\source\repos\baekjoon_1068\baekjoon_1068\main.cpp(32): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+d:\source\repos\baekjoon_1068\baekjoon_1068\main.cpp(75): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  baekjoon_1068.vcxproj -> D:\source\repos\baekjoon_1068\Debug\baekjoon_1068.exe
