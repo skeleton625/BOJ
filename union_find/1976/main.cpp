@@ -44,7 +44,7 @@ int main() {
 
 	/* 노드 그래프에 대한 정보 입력 */
 	for (int i = 1; i <= n; i++) {
-		for (int j = 1; j <= n; j++) {
+		for (int j = i; j <= n; j++) {
 			cin >> c;
 			/* i가 j보다 작은 경우는 이전 노드에서 간선 정보를 입력한 경우 */
 			if (j > i && c == 1) merge(i, j);
